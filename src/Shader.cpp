@@ -10,11 +10,12 @@
 
 
 Shader::Shader(const std::string& filename)
-	:m_FilePath(filename), m_RendererID(0)
+    :m_FilePath(filename), m_RendererID(0)
 {
-    ShaderProgramSource source = parseShader("res/shaders/Basic.shader");
+    // Use the provided filename instead of hardcoding it
+    ShaderProgramSource source = parseShader(filename);
     m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
-     
+
 }
 
 Shader::~Shader()
@@ -119,7 +120,7 @@ void Shader::Bind() const
 {
     GLCall(glUseProgram(m_RendererID));
 }
-void Shader::Unbind() const{
+void Shader::Unbind() const {
     GLCall(glUseProgram(0));
 }
 

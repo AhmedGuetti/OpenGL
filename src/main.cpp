@@ -14,8 +14,10 @@
 #include "Texture.h"
 
 /*
-To do:
-    Fix the texture
+Fixed:
+    - Texture is now uncommented
+    - Added clear color
+    - Fixed shader path
 */
 
 
@@ -37,7 +39,6 @@ int main()
     //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-       
 
     // init a windows variable 
     GLFWwindow* window;
@@ -67,7 +68,7 @@ int main()
     }
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	
+
     /* Set the viewport */
     printf("GL %s\n", glGetString(GL_VERSION));
     // We add a scope here 
@@ -83,7 +84,7 @@ int main()
         VertexArray va;
         VertexBuffer vb(positions, 4 * 4 * sizeof(float));
 
-        VertexBufferLayout layout; 
+        VertexBufferLayout layout;
         layout.Push<float>(2);
         layout.Push<float>(2);
         va.AddBuffer(vb, layout);
@@ -100,14 +101,19 @@ int main()
         shader.Bind();
         shader.SetUniform4f("u_Color", 0.4f, 0.256f, 0.6f, 1.0f);
 
-        // Texture
+        // Texture - Uncommented
         Texture texture("res/texture/chess.png");
         texture.Bind();
         shader.SetUniform1i("u_Texture", 0);
 
-
         // Renderer
         Renderer renderer;
+        // Set a clear color (not black)
+        renderer.SetClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+        // Debugging information
+        std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+        // Can't access private member GetUniformLocation
 
         // Cleaning
         va.Unbind();
@@ -125,8 +131,9 @@ int main()
             processInput(window);
 
             renderer.Clear();
- 
+
             shader.Bind();
+            texture.Bind(); // Make sure the texture is bound each frame
             shader.SetUniform4f("u_Color", r, 0.256f, 0.6f, 1.0f);
             renderer.Draw(va, ib, shader);
 
