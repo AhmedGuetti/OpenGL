@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/include;$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -97,7 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/include;$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/include;$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,7 +138,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/include;$(SolutionDir)vendor\stb_image;$(SolutionDir)vendor\GLM\include;$(SolutionDir)vendor\GLFW\include;$(SolutionDir)vendor\GLAD\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,25 +154,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\BezierCurve.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Cube.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
-    <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\mianBezier.cpp" />
+    <ClCompile Include="src\include\glad.c" />
+    <ClCompile Include="src\rayMain.cpp" />
+    <ClCompile Include="src\RayTracer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\BezierSurface.cpp" />
+    <ClCompile Include="src\Shape.cpp" />
+    <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BezierCurve.h" />
-    <ClInclude Include="src\IndexBuffer.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\Texture.h" />
-    <ClInclude Include="src\VertexArray.h" />
-    <ClInclude Include="src\VertexBuffer.h" />
-    <ClInclude Include="src\VertexBufferLayout.h" />
+    <ClInclude Include="src\include\BezierCurve.h" />
+    <ClInclude Include="src\include\Camera.h" />
+    <ClInclude Include="src\include\Cube.h" />
+    <ClInclude Include="src\include\Event.h" />
+    <ClInclude Include="src\include\EventDispatcher.h" />
+    <ClInclude Include="src\include\IndexBuffer.h" />
+    <ClInclude Include="src\include\InputManager.h" />
+    <ClInclude Include="src\include\KeyEvent.h" />
+    <ClInclude Include="src\include\Ray.h" />
+    <ClInclude Include="src\include\RayTracer.h" />
+    <ClInclude Include="src\include\Renderer.h" />
+    <ClInclude Include="src\include\Shader.h" />
+    <ClInclude Include="src\include\BezierSurface.h" />
+    <ClInclude Include="src\include\Shape.h" />
+    <ClInclude Include="src\include\Sphere.h" />
+    <ClInclude Include="src\include\Texture.h" />
+    <ClInclude Include="src\include\VertexArray.h" />
+    <ClInclude Include="src\include\VertexBuffer.h" />
+    <ClInclude Include="src\include\VertexBufferLayout.h" />
     <ClInclude Include="vendor\GLAD\include\glad\glad.h" />
     <ClInclude Include="vendor\GLFW\include\GLFW\glfw3.h" />
     <ClInclude Include="vendor\GLFW\include\GLFW\glfw3native.h" />
@@ -184,7 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Basic3D.shader" />
     <None Include="res\shaders\Bezier.shader" />
+    <None Include="res\shaders\3DCube.shader" />
+    <None Include="res\shaders\BezierSurface.shader" />
+    <None Include="res\shaders\BezierSurface.shader.old" />
+    <None Include="res\shaders\Ray.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\texture\chess.png" />

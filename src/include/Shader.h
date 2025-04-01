@@ -38,11 +38,8 @@ public:
 	void SetUniform1f(const std::string& name, float value);
 	void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
 
-	// Add a method to set matrix uniforms
-	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
-	{
-		glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
-	}
+	void SetUniform3f(const std::string& name, float v0, float v1, float v2);
+	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
 	// Get renderer ID - added for direct access to shader program ID
 	inline unsigned int GetRendererID() const { return m_RendererID; }
